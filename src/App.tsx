@@ -1,19 +1,27 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
 import './App.css';
+import { User } from './interfaces';
 
-interface AppProps {
-  headerText: string;
-  extraText?: string;
-}
+function App() {
+  const [user, setUser] = useState<null | User>(null); // union type
 
-function App({ headerText, extraText }: AppProps) {
-  const [count, setCount] = useState(0);
+  const fetchUser = () =>
+    setUser({
+      name: 'Mitchel',
+      age: 23,
+      country: 'the Netherlands',
+      address: {
+        street: 'Main st.',
+        number: 88,
+        zip: '21345',
+      },
+      admin: false,
+    });
 
   return (
     <div className="App">
-      <h1>{headerText}</h1>
-      {extraText && <h2>{extraText}</h2>}
+      <button onClick={fetchUser}>Fetch user on click</button>
+      <p>{user && user.name}</p>
     </div>
   );
 }
